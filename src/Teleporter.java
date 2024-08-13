@@ -1,6 +1,6 @@
 import processing.core.PApplet;
 
-public class Spark implements Particle {
+public class Teleporter implements Particle {
     private final PApplet p5;
     private float size;
     private float x;
@@ -10,23 +10,23 @@ public class Spark implements Particle {
     private int myColour;
 
 
-    public static Spark[] createSparks(PApplet p5, int numToCreate) {
-        Spark[] sparks = new Spark[numToCreate];
+    public static Teleporter[] createTeleporters(PApplet p5, int numToCreate) {
+        Teleporter[] teleporters = new Teleporter[numToCreate];
         for (int i = 0; i < numToCreate; i++) {
 
-            sparks[i] = createRandomSpark(p5);
+            teleporters[i] = createTeleporter(p5);
         }
-        return sparks;
+        return teleporters;
     }
 
-    private static Spark createRandomSpark(PApplet p5) {
+    private static Teleporter createTeleporter(PApplet p5) {
         float x = p5.random(0f, 800f);
         float y = p5.random(0f, 600f);
         float size = p5.random(10, 50);
-        return new Spark(p5, x, y, size);
+        return new Teleporter(p5, x, y, size);
     }
 
-    public Spark(PApplet p5, float x, float y, float size) {
+    public Teleporter(PApplet p5, float x, float y, float size) {
         this.p5 = p5;
         this.x = x;
         this.y = y;
@@ -39,9 +39,8 @@ public class Spark implements Particle {
         p5.circle(x, y, size);
     }
     public void update() {
-        final int stepSize = 5;
-        x+= p5.random(-stepSize, stepSize);
-        y+= p5.random(-stepSize, stepSize);
+        x = p5.random(0f, 800f);
+        y = p5.random(0f, 600f);
         size = PApplet.constrain(size + p5.random(-1, 1), 5, 100);
     }
 }
