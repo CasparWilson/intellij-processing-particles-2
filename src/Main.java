@@ -1,10 +1,8 @@
 import processing.core.PApplet;
-import java.util.Arrays;
+import java.util.Random;
 
 
 public class Main extends PApplet {
-    Spark[] sparks;
-    Teleporter[] teleporters;
     Particle[] particles;
     public static void main(String[] args) {
         PApplet.main(new String[]{"Main"});
@@ -16,13 +14,8 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        sparks = Spark.createSparks(this, 100);
-        teleporters = Teleporter.createTeleporters(this, 50);
-        particles = new Particle[sparks.length + teleporters.length];
-        System.arraycopy(sparks, 0, particles, 0, sparks.length);
-        System.arraycopy(teleporters, 0, particles, sparks.length, teleporters.length);
+        particles = createRandomParticles(10);
     }
-
 
     @Override
     public void draw() {
@@ -30,9 +23,20 @@ public class Main extends PApplet {
         for (Particle p : particles){
             p.display();
         }
-
         for (Particle p : particles){
             p.update();
         }
+    }
+
+    private Particle[] createRandomParticles(int numParticles){
+        Random rand = new Random();
+        Particle[] particles = new Particle[numParticles];
+        for (int i = 0; i < numParticles; i++) {
+            if(rand.nextBoolean()){
+                particles[i] = Spark.createRandomSpark(this);
+            } else
+                particles[i] = Teleporter.createRandomTeleporter(this);
+        }
+        return particles;
     }
 }

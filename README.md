@@ -7,3 +7,5 @@ Note that the project has multiple branches, with differing levels of complexity
 ### Installation
 
 This project bundles all the required Processing libraries.  This isn't a best-practice, but keeps things very simple.
+
+Now generates 10 particles, randomly divided in two kinds. 

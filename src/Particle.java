@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public interface Particle {
     public void display();
 

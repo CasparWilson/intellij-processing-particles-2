@@ -5,21 +5,9 @@ public class Teleporter implements Particle {
     private float size;
     private float x;
     private float y;
-
-    //there's no real color type, it's just stored as an int
     private int myColour;
 
-
-    public static Teleporter[] createTeleporters(PApplet p5, int numToCreate) {
-        Teleporter[] teleporters = new Teleporter[numToCreate];
-        for (int i = 0; i < numToCreate; i++) {
-
-            teleporters[i] = createTeleporter(p5);
-        }
-        return teleporters;
-    }
-
-    private static Teleporter createTeleporter(PApplet p5) {
+    public static Teleporter createRandomTeleporter(PApplet p5) {
         float x = p5.random(0f, 800f);
         float y = p5.random(0f, 600f);
         float size = p5.random(10, 50);

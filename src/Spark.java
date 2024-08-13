@@ -5,21 +5,9 @@ public class Spark implements Particle {
     private float size;
     private float x;
     private float y;
-
-    //there's no real color type, it's just stored as an int
     private int myColour;
 
-
-    public static Spark[] createSparks(PApplet p5, int numToCreate) {
-        Spark[] sparks = new Spark[numToCreate];
-        for (int i = 0; i < numToCreate; i++) {
-
-            sparks[i] = createRandomSpark(p5);
-        }
-        return sparks;
-    }
-
-    private static Spark createRandomSpark(PApplet p5) {
+    public static Spark createRandomSpark(PApplet p5) {
         float x = p5.random(0f, 800f);
         float y = p5.random(0f, 600f);
         float size = p5.random(10, 50);
