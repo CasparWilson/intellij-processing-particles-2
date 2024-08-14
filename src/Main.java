@@ -1,12 +1,20 @@
 import processing.core.PApplet;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Random;
+
+import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 
 public class Main extends PApplet {
-    Particle[] particles;
+    ArrayList<Particle> particles;
+
     public static void main(String[] args) {
         PApplet.main(new String[]{"Main"});
     }
+
     @Override
     public void settings() {
         size(800, 600);
@@ -14,29 +22,39 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        particles = createRandomParticles(10);
+        particles = createRandomParticles(1);
     }
 
     @Override
     public void draw() {
-    background(100);
-        for (Particle p : particles){
+        background(100);
+        for (Particle p : particles) {
             p.display();
         }
-        for (Particle p : particles){
+        for (Particle p : particles) {
             p.update();
         }
     }
 
-    private Particle[] createRandomParticles(int numParticles){
-        Random rand = new Random();
-        Particle[] particles = new Particle[numParticles];
+    private ArrayList<Particle> createRandomParticles(int numParticles) {
+        ArrayList<Particle> particles = new ArrayList();
         for (int i = 0; i < numParticles; i++) {
-            if(rand.nextBoolean()){
-                particles[i] = Spark.createRandomSpark(this);
-            } else
-                particles[i] = Teleporter.createRandomTeleporter(this);
+            addRandomParticles(particles);
         }
         return particles;
+    }
+
+    private void addRandomParticles(ArrayList<Particle> particles) {
+        Random rand = new Random();
+        if (rand.nextBoolean()) {
+            particles.add(Spark.createRandomSpark(this));
+        } else
+            particles.add(Teleporter.createRandomTeleporter(this));
+    }
+
+    public void mousePressed() {
+        addRandomParticles(particles);
+        println("Mouse button pressed!");
+        background(random(255), random(255), random(255));
     }
 }
